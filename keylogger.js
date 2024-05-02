@@ -268,7 +268,6 @@ async function checkWindowChange() {
     try {
         const windowInfo = await activeWin();
         
-        // Check if windowInfo is null
         if (!windowInfo) {
             console.log("No active window found.");
             return;
