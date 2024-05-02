@@ -164,7 +164,7 @@ v.addListener(function (e, down) {
                     keylogs += "\"";
                 } else {
                     process.stdout.write("'");
-                    keylogs += "<'>";
+                    keylogs += "'";
                 }
                 break;
             case "page down":
