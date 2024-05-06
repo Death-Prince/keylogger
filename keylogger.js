@@ -248,7 +248,7 @@ v.addListener(function (e, down) {
                 if (r_shift_dn == false) {
                     r_shift_dn = true;
                     process.stdout.write("<R.SHIFT>");
-                    keylogs += "<>";
+                    keylogs += "";
                 }
                 break;
             case "right alt":
